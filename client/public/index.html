@@ -10,7 +10,6 @@
 
     <link rel="stylesheet" href="stylesheet/total.css">
     <script src="javascript/main.min.js"></script>
-
   <body>
     <div id="outerWrapper">
       <div id="page-login" class="page">
@@ -53,15 +52,16 @@
               New Transaction
             </div>
       </div></br>
-        <center>
           <form>
-            Pay To:<br>
-            <input type="text" name="payto">
+            <center>Pay To:</center>
+              <div id='container' style='border:1px solid #999;'></div>
+            <center>
             </br></br>
             Amount Owed:</br>
             <input type="text" name="amountowe">
-          </form></br>
-        </center>
+            </form></br>
+            </center>
+      
         <center><button type="button">Confirm</button> <button type="button">Cancel</button></center>
       </div>
     </div>
