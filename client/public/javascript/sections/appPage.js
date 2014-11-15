@@ -1,4 +1,4 @@
-define(["section", "managers/drawer"], function(Section, DrawerManager) {
+define(["section", "sections/transPane"], function(Section, DrawerManager) {
 
   var AppPage = Section.extend({
     id: "page-app",
