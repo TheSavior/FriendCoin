@@ -1,0 +1,303 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D0EC5C6C19F3280100F4007C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EC5C6B19F3280100F4007C /* main.m */; };
+		D0EC5C6F19F3280100F4007C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EC5C6E19F3280100F4007C /* AppDelegate.m */; };
+		D0EC5C7219F3280100F4007C /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EC5C7119F3280100F4007C /* WebViewController.m */; };
+		D0EC5C7719F3280100F4007C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0EC5C7619F3280100F4007C /* Images.xcassets */; };
+		D0EC5C9019F32B3900F4007C /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EC5C8F19F32B3900F4007C /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D0EC5C9219F32B4200F4007C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EC5C9119F32B4200F4007C /* UIKit.framework */; };
+		D0EC5D0D19F3529100F4007C /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EC5D0C19F3529100F4007C /* QRCodeViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		D0EC5C6619F3280100F4007C /* CoinbaseTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinbaseTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0EC5C6A19F3280100F4007C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0EC5C6B19F3280100F4007C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D0EC5C6D19F3280100F4007C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D0EC5C6E19F3280100F4007C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D0EC5C7019F3280100F4007C /* WebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		D0EC5C7119F3280100F4007C /* WebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		D0EC5C7619F3280100F4007C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D0EC5C8F19F32B3900F4007C /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		D0EC5C9119F32B4200F4007C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D0EC5D0B19F3529100F4007C /* QRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeViewController.h; sourceTree = "<group>"; };
+		D0EC5D0C19F3529100F4007C /* QRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D0EC5C6319F3280100F4007C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0EC5C9219F32B4200F4007C /* UIKit.framework in Frameworks */,
+				D0EC5C9019F32B3900F4007C /* WebKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D0EC5C5D19F3280100F4007C = {
+			isa = PBXGroup;
+			children = (
+				D0EC5C6819F3280100F4007C /* CoinbaseTest */,
+				D0EC5C9319F32B4D00F4007C /* Frameworks */,
+				D0EC5C6719F3280100F4007C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D0EC5C6719F3280100F4007C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D0EC5C6619F3280100F4007C /* CoinbaseTest.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D0EC5C6819F3280100F4007C /* CoinbaseTest */ = {
+			isa = PBXGroup;
+			children = (
+				D0EC5C6D19F3280100F4007C /* AppDelegate.h */,
+				D0EC5C6E19F3280100F4007C /* AppDelegate.m */,
+				D0EC5C7019F3280100F4007C /* WebViewController.h */,
+				D0EC5C7119F3280100F4007C /* WebViewController.m */,
+				D0EC5D0B19F3529100F4007C /* QRCodeViewController.h */,
+				D0EC5D0C19F3529100F4007C /* QRCodeViewController.m */,
+				D0EC5C7619F3280100F4007C /* Images.xcassets */,
+				D0EC5C6919F3280100F4007C /* Supporting Files */,
+			);
+			path = CoinbaseTest;
+			sourceTree = "<group>";
+		};
+		D0EC5C6919F3280100F4007C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D0EC5C6A19F3280100F4007C /* Info.plist */,
+				D0EC5C6B19F3280100F4007C /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D0EC5C9319F32B4D00F4007C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D0EC5C9119F32B4200F4007C /* UIKit.framework */,
+				D0EC5C8F19F32B3900F4007C /* WebKit.framework */,
+			);
+			name = Frameworks;
+			path = CoinbaseTest;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D0EC5C6519F3280100F4007C /* CoinbaseTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D0EC5C8919F3280200F4007C /* Build configuration list for PBXNativeTarget "CoinbaseTest" */;
+			buildPhases = (
+				D0EC5C6219F3280100F4007C /* Sources */,
+				D0EC5C6319F3280100F4007C /* Frameworks */,
+				D0EC5C6419F3280100F4007C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CoinbaseTest;
+			productName = CoinbaseTest;
+			productReference = D0EC5C6619F3280100F4007C /* CoinbaseTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D0EC5C5E19F3280100F4007C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "Conrad Kramer";
+				TargetAttributes = {
+					D0EC5C6519F3280100F4007C = {
+						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = UGJYL6SH9D;
+					};
+				};
+			};
+			buildConfigurationList = D0EC5C6119F3280100F4007C /* Build configuration list for PBXProject "CoinbaseTest" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D0EC5C5D19F3280100F4007C;
+			productRefGroup = D0EC5C6719F3280100F4007C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D0EC5C6519F3280100F4007C /* CoinbaseTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D0EC5C6419F3280100F4007C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0EC5C7719F3280100F4007C /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D0EC5C6219F3280100F4007C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0EC5C7219F3280100F4007C /* WebViewController.m in Sources */,
+				D0EC5C6F19F3280100F4007C /* AppDelegate.m in Sources */,
+				D0EC5D0D19F3529100F4007C /* QRCodeViewController.m in Sources */,
+				D0EC5C6C19F3280100F4007C /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		D0EC5C8719F3280200F4007C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D0EC5C8819F3280200F4007C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D0EC5C8A19F3280200F4007C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = CoinbaseTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D0EC5C8B19F3280200F4007C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = CoinbaseTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D0EC5C6119F3280100F4007C /* Build configuration list for PBXProject "CoinbaseTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D0EC5C8719F3280200F4007C /* Debug */,
+				D0EC5C8819F3280200F4007C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D0EC5C8919F3280200F4007C /* Build configuration list for PBXNativeTarget "CoinbaseTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D0EC5C8A19F3280200F4007C /* Debug */,
+				D0EC5C8B19F3280200F4007C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D0EC5C5E19F3280100F4007C /* Project object */;
+}
