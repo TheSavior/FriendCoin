@@ -6,8 +6,16 @@ define(["section", 'tapHandler', 'platform', 'event'], function(Section, TapHand
     init: function() {
       this._super();
 
+      new TapHandler(document.getElementById("phone-title-bar"), {
+        tap: this._menuTapped.bind(this),
+        start: this._stopPropagation.bind(this),
+        end: this._stopPropagation.bind(this)
+      });
+
       new TapHandler(document.getElementById("scan-button"), {
-        tap: this._scanTapped.bind(this)
+        tap: this._scanTapped.bind(this),
+        start: this._stopPropagation.bind(this),
+        end: this._stopPropagation.bind(this)
       });
     },
 
@@ -18,6 +26,12 @@ define(["section", 'tapHandler', 'platform', 'event'], function(Section, TapHand
     afterShow: function() {},
 
     afterHide: function() {},
+
+    _menuTapped: function(e) {
+      Event.trigger("showPage", "newTrans");
+
+      e.stopPropagation();
+    },
 
     _scanTapped: function(e) {
       e.stopPropagation();
@@ -32,16 +46,17 @@ define(["section", 'tapHandler', 'platform', 'event'], function(Section, TapHand
       window.location = "coinbase://readQRCode";
     },
 
-    _addResult: function(result) {
+    _stopPropagation: function(e) {
+      e.stopPropagation();
+    },
 
+    _addResult: function(result) {
       var list = document.getElementsByClassName("transaction-list")[0];
 
       var newItem = document.createElement("li");
       newItem.innerText = result;
       list.appendChild(newItem);
     }
-
-
   });
 
   return new TransPane();

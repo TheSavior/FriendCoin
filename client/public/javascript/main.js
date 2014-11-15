@@ -11,9 +11,9 @@ function init() {
   window.log = console.log.bind(console);
 
   require(['event', 'managers/login'], function (Event, LoginManager) {
-    // setTimeout(function () {
-    //   Event.trigger("showPage", "app");
-    // }, 3000);
+    setTimeout(function () {
+      Event.trigger("showPage", "app");
+    }, 300);
   });
 }
 
