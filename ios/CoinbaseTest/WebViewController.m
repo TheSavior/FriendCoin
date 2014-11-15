@@ -8,6 +8,7 @@
 
 #import "WebViewController.h"
 #import "QRCodeViewController.h"
+#import "ContactListController.h"
 
 @interface WebViewController () <UIWebViewDelegate, QRCodeViewControllerDelegate>
 
@@ -49,6 +50,7 @@ static NSString * const CoinbaseBaseURLString = @"http://drawer.ngrok.com/";
     return UIStatusBarStyleLightContent;
 }
 
+
 #pragma mark - UIWebViewDelegate
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
@@ -59,6 +61,11 @@ static NSString * const CoinbaseBaseURLString = @"http://drawer.ngrok.com/";
             codeViewController.delegate = self;
             UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:codeViewController];
             [self presentViewController:navigationController animated:YES completion:nil];
+        }
+        else if ([components.host isEqualToString:@"getContacts"]) {
+            ContactListController *contactListController = [[ContactListController alloc] init];
+            contactListController.delegate = self;
+            [contactListController GetContactList];
         }
     }
     
@@ -81,4 +88,13 @@ static NSString * const CoinbaseBaseURLString = @"http://drawer.ngrok.com/";
     }];
 }
 
+#pragma mark - ContactListControllerDelegate
+
+- (void)contactListController:(ContactListController *)contactListController didGetContacts:(NSString *)string {
+    NSLog(@"Yep");
+//    [contactListController dismissViewControllerAnimated:YES completion:^{
+        NSString *javascript = [NSString stringWithFormat:@"contactResult(%@)", string];
+        [self.webView stringByEvaluatingJavaScriptFromString:javascript];
+//    }];
+}
 @end

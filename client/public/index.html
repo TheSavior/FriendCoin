@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" class="nonbodyscroll">
+  <head>
+    <meta charset="utf-8">
+    <title>FriendCoin</title>
+    <!-- <meta name="viewport" content="initial-scale=1.0, user-scalable=no, minimal-ui"> -->
+    <meta id="viewport" name="viewport" content ="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <link rel="stylesheet" href="stylesheet/total.css">
+    <script src="javascript/main.min.js"></script>
+  <body>
+    <div id="outerWrapper">
+      <div id="page-login" class="page">
+        <div>FriendCoin</div></br>
+        <img src="fonts/Bitcoin.png" style="position:absolute; margin-left:10%; margin-top:-14%" alt="" height="20" width="20">
+        <div style="font-size:15px;">Fast & Safe way to send $ to your friends</div>
+        <div id="btn-login">Log in</div>
+      </div>
+    </div>
+
+      <div id="page-app" class="page pane-slider">
+        <div id="pane-translist" class="pane">
+          <div id="phone-title-bar" class="title-bar">
+            <div class="center">
+              FriendCoin!
+            </div>
+            <div class="right">
+              <span class="icon-menu"></span>
+            </div>
+          </div>
+
+          <div id="button-bar">
+            <div id="scan-button">Scan</div>
+          </div>
+
+          <ul class="transaction-list">
+            <li>
+              You purchased bitcoins<span class="positive">2.39</span>
+            </li>
+            <li>
+              You purchased bitcoins<span class="positive">.01</span>
+            </li>
+            <li>
+              You sold bitcoins<span class="negative">.01</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="page-new-trans" class="page">
+        <div class="title-bar">
+          <div class="center">
+            New Transaction
+          </div>
+        </div>
+          <form>
+            <center>Pay To:</center>
+              <div id='container' style='border:1px solid #999;'></div>
+            <center>
+            </br></br>
+            Amount Owed:</br>
+            <input type="text" name="amountowe">
+
+          </form></br>
+        </center>
+        <center>
+          <div class="button">Confirm</div>
+          <div class="button">Cancel</div>
+        </center>gi
+      </div>
+    </div>
+
+    <script>
+    var url = '';
+
+    if (location.host.indexOf('localhost') === 0) {
+      url = location.host.split(':')[0] + ':35729';
+    }
+    else
+    {
+      url = 'drawerreload.ngrok.com';
+    }
+
+    var fullUrl = 'http://' + url + '/livereload.js?snipver=1';
+    console.log('live reloading from', fullUrl);
+
+    document.write('<script src="'+fullUrl+'"></' + 'script>');
+
+    </script>
+  </body>
+</html>

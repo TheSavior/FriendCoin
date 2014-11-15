@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45BC06511A17582700C0B9C9 /* ContactListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BC06501A17582700C0B9C9 /* ContactListController.m */; };
 		D0EC5C6C19F3280100F4007C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EC5C6B19F3280100F4007C /* main.m */; };
 		D0EC5C6F19F3280100F4007C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EC5C6E19F3280100F4007C /* AppDelegate.m */; };
 		D0EC5C7219F3280100F4007C /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EC5C7119F3280100F4007C /* WebViewController.m */; };
@@ -17,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		45BC064F1A17582700C0B9C9 /* ContactListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactListController.h; sourceTree = "<group>"; };
+		45BC06501A17582700C0B9C9 /* ContactListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactListController.m; sourceTree = "<group>"; };
 		D0EC5C6619F3280100F4007C /* CoinbaseTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinbaseTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0EC5C6A19F3280100F4007C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0EC5C6B19F3280100F4007C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -68,6 +71,8 @@
 				D0EC5C6E19F3280100F4007C /* AppDelegate.m */,
 				D0EC5C7019F3280100F4007C /* WebViewController.h */,
 				D0EC5C7119F3280100F4007C /* WebViewController.m */,
+				45BC064F1A17582700C0B9C9 /* ContactListController.h */,
+				45BC06501A17582700C0B9C9 /* ContactListController.m */,
 				D0EC5D0B19F3529100F4007C /* QRCodeViewController.h */,
 				D0EC5D0C19F3529100F4007C /* QRCodeViewController.m */,
 				D0EC5C7619F3280100F4007C /* Images.xcassets */,
@@ -164,6 +169,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45BC06511A17582700C0B9C9 /* ContactListController.m in Sources */,
 				D0EC5C7219F3280100F4007C /* WebViewController.m in Sources */,
 				D0EC5C6F19F3280100F4007C /* AppDelegate.m in Sources */,
 				D0EC5D0D19F3529100F4007C /* QRCodeViewController.m in Sources */,
@@ -258,9 +264,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CoinbaseTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -270,9 +279,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CoinbaseTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
