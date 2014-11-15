@@ -97,14 +97,4 @@ static NSString * const CoinbaseBaseURLString = @"http://drawer.ngrok.com/";
         [self.webView stringByEvaluatingJavaScriptFromString:javascript];
 //    }];
 }
-
-//
-//- (void)contactListControllerDidCancel:(QRCodeViewController *)contactListController {
-//        NSLog(@"Nop");
-////    [contactListController dismissViewControllerAnimated:YES completion:^{
-//        NSString *javascript = @"contactResult(undefined)";
-//        [self.webView stringByEvaluatingJavaScriptFromString:javascript];
-////    }];
-//}
-
 @end

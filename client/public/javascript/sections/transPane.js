@@ -14,8 +14,6 @@ define(["section", 'tapHandler', 'platform', 'event'], function(Section, TapHand
 
       new TapHandler(document.getElementById("scan-button"), {
         tap: this._scanTapped.bind(this),
-        start: this._stopPropagation.bind(this),
-        end: this._stopPropagation.bind(this)
       });
     },
 

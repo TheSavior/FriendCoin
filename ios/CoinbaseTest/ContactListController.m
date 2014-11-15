@@ -26,7 +26,6 @@
     if ([self.delegate respondsToSelector:@selector(contactListController:didGetContacts:)]) {
         NSLog(@"Go");
         [self.delegate contactListController:self didGetContacts:response];
-        
     }
 }
 
@@ -106,7 +105,6 @@
         [self sendResponse:@"{}"];
         // Send error
     }
-
 
     if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusDenied ||
         ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusRestricted){
