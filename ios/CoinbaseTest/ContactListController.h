@@ -6,12 +6,6 @@
 //  Copyright (c) 2014 Conrad Kramer. All rights reserved.
 //
 
-#ifndef CoinbaseTest_ContactList_h
-#define CoinbaseTest_ContactList_h
-
-
-#endif
-
 
 @class ContactListController;
 
@@ -25,5 +19,5 @@
 @interface ContactListController : NSObject
 @property (nonatomic, weak) id<ContactListControllerDelegate> delegate;
 
-- (NSString *) GetContactList;
+- (void) GetContactList;
 @end
