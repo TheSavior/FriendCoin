@@ -15,12 +15,6 @@ define(["section", 'tapHandler', 'platform', 'event'], function(Section, TapHand
       new TapHandler(document.getElementById("scan-button"), {
         tap: this._scanTapped.bind(this),
       });
-
-
-
-      new TapHandler(document.getElementById("contacts-button"), {
-        tap: this._contactsTapped.bind(this)
-      });
     },
 
     show: function(e) {
@@ -48,21 +42,6 @@ define(["section", 'tapHandler', 'platform', 'event'], function(Section, TapHand
       }).bind(this);
 
       window.location = "coinbase://readQRCode";
-    },
-
-    _contactsTapped: function(e) {
-      e.stopPropagation();
-
-      window.contactResult = (function(contacts) {
-        window.contactResult = undefined;
-        this._gotContacts(contacts);
-      }).bind(this);
-
-      window.location = "coinbase://getContacts";
-    },
-
-    _gotContacts: function(contacts) {
-      console.log(contacts);
     },
 
     _stopPropagation: function(e) {
