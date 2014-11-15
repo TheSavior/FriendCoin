@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" class="nonbodyscroll">
+  <head>
+    <meta charset="utf-8">
+    <title>Coinbase</title>
+    <!-- <meta name="viewport" content="initial-scale=1.0, user-scalable=no, minimal-ui"> -->
+    <meta id="viewport" name="viewport" content ="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <link rel="stylesheet" href="stylesheet/total.css">
+    <script src="javascript/main.min.js"></script>
+
+  <body>
+    <div id="outerWrapper">
+      <div id="page-login" class="page">
+        Coinbase
+        <div id="btn-login">Log in</div>
+      </div>
+
+      <div id="page-app" class="page pane-slider">
+        <div id="pane-drawer" class="pane">
+          <ul>
+            <li>Transactions</li>
+            <li>Buy</li>
+            <li>Sell</li>
+            <li>Settings</li>
+          </ul>
+        </div>
+        <div id="pane-translist" class="pane">
+          <div id="phone-title-bar">
+            <div class="left">
+              <span class="icon-menu"></span>
+            </div>
+            <div class="center">
+              coinbase!
+            </div>
+          </div>
+
+          <div id="button-bar"><div id="scan-button">Scan</div></div>
+
+          <ul class="transaction-list">
+            <li>
+              You purhcased bitcoins<span class="positive">2.39</span>
+            </li>
+            <li>
+              You purchased bitcoins<span class="positive">.01</span>
+            </li>
+            <li>
+              You sold bitcoins<span class="negative">.01</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script>
+    var url = '';
+
+    if (location.host.indexOf('localhost') === 0) {
+      url = location.host.split(':')[0] + ':35729';
+    }
+    else
+    {
+      url = 'drawerreload.ngrok.com';
+    }
+
+    var fullUrl = 'http://' + url + '/livereload.js?snipver=1';
+    console.log('live reloading from', fullUrl);
+
+    document.write('<script src="'+fullUrl+'"></' + 'script>');
+
+    </script>
+  </body>
+</html>
