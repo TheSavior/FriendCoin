@@ -1,0 +1,7 @@
+node_modules/
+npm-debug.log
+build/
+.env
+.DS_Store
+.sass-cache
+build/javascript/main.min.js.map

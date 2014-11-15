@@ -1,0 +1,182 @@
+@import "mixins";
+@import "normalize";
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@import "icomoon";
+
+$primary: #3681CC;
+$lightPrimary: lighten($primary, 20%);
+$darkPrimary: darken($primary, 20%);
+$borderColor: #ccc;
+
+*, *:before, *:after {
+  @include box-sizing(border-box);
+}
+
+body, html {
+  @include user-select(none);
+
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-smoothing: subpixel-antialiased;
+
+  margin: 0;
+  padding: 0;
+  cursor: default;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: Helvetica, 'Open Sans', Arial, sans-serif;
+  color: #666;
+  font-size: 16px;
+  line-height: 150%;
+  font-weight: 100;
+
+  @include user-select(none);
+  -webkit-overflow-scrolling: touch;
+}
+
+a:hover {
+  color: $primary;
+}
+
+body.open {
+  #page-login {
+    @include transform(translate3d(0,1000px,0));
+  }
+}
+
+.page, .pane, #outerWrapper {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+#page-login {
+  background-color: $primary;
+  color: white;
+  z-index: 10;
+
+  font-size: 24px;
+
+  @include vertical-center();
+  @include flex-direction(column);
+  @include transition(.7s all);
+
+  #btn-login {
+    margin-top: 20px;
+
+    @include border-radius(5px);
+
+    background-color: $lightPrimary;
+    border: 1px solid $darkPrimary;
+    padding: 15px 30px;
+    color: $darkPrimary;
+  }
+}
+
+#page-app {
+  overflow: hidden;
+}
+
+#pane-drawer {
+  background: #222;
+  color: darken(white, 10%);
+
+  ul {
+    margin-top: 80px;
+  }
+
+  li {
+    font-size: 18px;
+    padding: 10px 20px;
+  }
+}
+
+.tap-catch {
+  display: none;
+  z-index: 1000;
+
+  &.visible {
+    display: block;
+  }
+}
+
+#pane-translist {
+  background: white;
+  @include transform(translateZ(0px));
+
+  &.animating {
+    @include transition(.2s all);
+  }
+}
+
+#phone-title-bar {
+  height: 44px;
+  background-color: $primary;
+  width: 100%;
+  color: white;
+  line-height: 44px;
+  padding: 0 10px;
+  position: relative;
+  text-align: center;
+  font-size: 20px;
+
+  z-index: 0;
+
+  .left {
+    position: absolute;
+    left: 20px;
+    font-size: 28px;
+    z-index: 2;
+  }
+
+  .center {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 1;
+  }
+}
+
+#button-bar {
+  background-color: #ddd;
+  text-align: center;
+  line-height: 50px;
+  border-bottom: 1px solid #ccc;
+  font-size: 18px;
+}
+
+.transaction-list {
+  li {
+    border-bottom: 1px solid #ccc;
+    line-height: 50px;
+    margin-left: 10px;
+
+    span.positive, span.negative {
+      float: right;
+      margin-right: 10px;
+      font-size:18px;
+
+      &:before {
+        content: "$";
+      }
+
+      &.positive {
+        color: green;
+      }
+
+      &.negative {
+        color: red;
+      }
+    }
+  }
+}
