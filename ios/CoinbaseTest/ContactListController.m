@@ -26,7 +26,6 @@
     if ([self.delegate respondsToSelector:@selector(contactListController:didGetContacts:)]) {
         NSLog(@"Go");
         [self.delegate contactListController:self didGetContacts:response];
-        
     }
 }
 
@@ -85,29 +84,6 @@
 }
 
 - (void)tryReadContactList {
-    CFErrorRef error = nil;
-    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
-    if (addressBook) {
-        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
-            if (granted) {
-
-                CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
-                for (CFIndex idx = 0; idx < CFArrayGetCount(people); idx++) {
-                    ABRecordRef person = CFArrayGetValueAtIndex(people, idx);
-                    NSString *name = (__bridge NSString *)ABRecordCopyCompositeName(person);
-                    NSLog(@"SOMEONE NAMED %@", name);
-                }
-            } else {
-                [self sendResponse:@"{}"];
-                // Send error
-            }
-        });
-    } else {
-        [self sendResponse:@"{}"];
-        // Send error
-    }
-
-
     if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusDenied ||
         ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusRestricted){
         //1
