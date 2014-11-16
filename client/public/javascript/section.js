@@ -24,7 +24,7 @@ define(["class"], function(Class) {
 
     afterShow: function() {
       if (this.element) {
-        this.element.style.display = "block";
+        this.element.classList.remove("hidden");
       }
 
       this._visible = true;
@@ -32,7 +32,8 @@ define(["class"], function(Class) {
 
     afterHide: function() {
       if (this.element) {
-        this.element.style.display = "";
+        this.element.classList.add("hidden");
+        // this.element.style.display = "";
       }
 
       this._visible = false;

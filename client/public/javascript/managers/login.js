@@ -1,4 +1,4 @@
-define(["event", "sections/loginPage", "sections/appPage", "sections/newTrans"], function(Event, LoginPage, AppPage, NewTrans) {
+define(["event", "sections/loginPage", "sections/appPage", "sections/newTrans", "sections/phonePage"], function(Event, LoginPage, AppPage, NewTrans, PhonePage) {
   function LoginManager() {
     this.init();
   }
@@ -16,10 +16,18 @@ define(["event", "sections/loginPage", "sections/appPage", "sections/newTrans"],
       this.pages.loginPage = LoginPage;
       this.pages.app = AppPage;
       this.pages.newTrans = NewTrans;
+      this.pages.phonePage = PhonePage;
 
       if (localStorage.isLoggedIn === "true") {
         document.body.classList.add("open");
-        this.setPage("app");
+
+        if(this._hasPhoneNumber()) {
+          this.setPage("app");
+        }
+        else
+        {
+          this.setPage("phonePage");
+        }
       }
       else
       {
@@ -59,7 +67,14 @@ define(["event", "sections/loginPage", "sections/appPage", "sections/newTrans"],
     _authenticatedStatusChanged: function(status) {
       if (status.loggedIn) {
         localStorage.isLoggedIn = true;
-        this.setPage("app");
+
+        if(this._hasPhoneNumber()) {
+          this.setPage("app");
+        }
+        else
+        {
+          this.setPage("phonePage");
+        }
       }
       else
       {
@@ -71,6 +86,10 @@ define(["event", "sections/loginPage", "sections/appPage", "sections/newTrans"],
     _showPage: function(pageName) {
       this.setPage(pageName);
     },
+
+    _hasPhoneNumber: function() {
+      return docCookie.getItem("phone") && docCookie.getItem("phone") === '1';
+    }
   };
 
   return new LoginManager();

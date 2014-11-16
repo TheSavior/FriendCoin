@@ -6,9 +6,17 @@ define(["event", "section", "tapHandler", "platform"], function(Event, Section, 
     init: function() {
       this._super();
 
-      new TapHandler(document.getElementById("btn-login"), {
+      var btnLogin = document.getElementById("btn-login");
+
+      new TapHandler(btnLogin, {
         tap: function() {
-          Event.trigger("showPage", "app");
+          if (btnLogin.dataset.url.indexOf("http") === 0) {
+            window.location = btnLogin.dataset.url;
+          }
+          else
+          {
+            Event.trigger("showPage", "phonePage");
+          }
         }
       });
     },
@@ -18,7 +26,7 @@ define(["event", "section", "tapHandler", "platform"], function(Event, Section, 
     },
 
     afterShow: function() {
-      this.element.style.display = "";
+      this.element.classList.remove("hidden");
 
       setTimeout(function() {
         document.body.classList.remove("open");
@@ -36,7 +44,7 @@ define(["event", "section", "tapHandler", "platform"], function(Event, Section, 
         document.body.classList.add("open");
 
         var func = (function afterTransition() {
-          this.element.style.display = "none";
+          this.element.classList.add("hidden");
           this.element.removeEventListener("transitionend", func);
         }).bind(this);
 

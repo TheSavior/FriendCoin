@@ -21,10 +21,6 @@ define(["section", 'tapHandler', 'platform', 'event'], function(Section, TapHand
       console.log("showing transaction pane");
     },
 
-    afterShow: function() {},
-
-    afterHide: function() {},
-
     _menuTapped: function(e) {
       Event.trigger("showPage", "newTrans");
 
