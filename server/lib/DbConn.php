@@ -19,10 +19,10 @@ class DbConn {
   // Stores tokens for the given user
   // If the phone number already exists,
   // just update the access and refresh tokens.
-  public function storeUserToken($cbId, $phoneNum, $accessToken, $refreshToken) {
+  public function storeUserToken($cbId, $accessToken, $refreshToken) {
     // TODO Add user to database
-    $query = "INSERT INTO users (cb_id, phone_no,cb_access_token, cb_refresh_token) ";
-    $query .= "VALUES ('$cbId', '$phoneNum','$accessToken','$refreshToken') ";
+    $query = "INSERT INTO users (cb_id, cb_access_token, cb_refresh_token) ";
+    $query .= "VALUES ('$cbId','$accessToken','$refreshToken') ";
     $query .= "ON DUPLICATE KEY UPDATE ";
     $query .= "cb_access_token=VALUES(cb_access_token), ";
     $query .= "cb_refresh_token=VALUES(cb_refresh_token);";
@@ -30,6 +30,25 @@ class DbConn {
     if (!$result) {
       throw new Exception($this->CONN->error);
     }
+    return $result;
+  }
+
+  public function userHasPhone($cbId) {
+    $query = "SELECT phone_no FROM users WHERE cb_id='$cbId';";
+    $result = $this->CONN->query($query);
+    if(!$result) {
+      throw new Exception($this->CONN->error);
+    }
+
+    // If cb id doesn't exist in the database, return false
+    if ($result->num_rows === 0) {
+      return false;
+    }
+
+    // Check if phone is null or an empty string, return false
+    $row = $result->fetch_assoc();
+    return !is_null($row['phone_no']) &&
+           strlen(trim($row['phone_no'])) > 0;
   }
 
   public function getUserTokens($cbId) {
@@ -39,16 +58,25 @@ class DbConn {
     if (!$result || $result->num_rows === 0) {
       throw new Exception($this->CONN->error);
     }
-    // TODO return user tokens
+    // Fetch only the first record and
+    // return the access/refresh token
+    $row = $res->fetch_assoc();
+    return array(
+      "access_token" => $row['cb_access_token'],
+      "refresh_token" => $row['cb_refresh_token']
+    );
   }
 
   public function attachPhone($cbId, $phoneNum) {
-    // TODO make update query for phone
-    $query = "";
+    $query = "UPDATE users ";
+    $query .= "SET phone_no='$phoneNum' ";
+    $query .= "WHERE cb_id='$cbId';";
+    
     $result = $this->CONN->real_query($query);
     if (!result) {
       throw new Exception($this->CONN->error);
     }
+    return true;
   }
 }
 
