@@ -73,13 +73,18 @@ $app->get('/callback', function() use ($app) {
     $dbc = new DbConn();
     // Insert/Update database with user's coinbase id
     $cbId = $coinbase->getUser()->id;
+    $email = $coinbase->getUser()->email;
     $dbc->storeUserToken($cbId,
                          $tokens["access_token"],
-                         $tokens["refresh_token"]);
+                         $tokens["refresh_token"],
+                         $email);
     // Setting a cookie if the user has a phone in the database
     if ($dbc->userHasPhone($cbId)) {
       $app->setCookie('hasPhone');
     }
+
+    // Initializing SESSION variable
+    $_SESSION['cbid'] = $cbId;
 
     // set cookie to success
     // redirect to index.php
@@ -145,7 +150,8 @@ $app->get('/register', function() use ($app){
     $dbc = new DbConn();
     $dbc->storeUserToken($_SESSION['phoneno'],
                        $tokens["access_token"],
-                       $tokens["refresh_token"]);
+                       $tokens["refresh_token"],
+                       '');
   } catch(Exception $e) {
     echo json_encode(array(
               "status" => false,
@@ -159,22 +165,72 @@ $app->get('/register', function() use ($app){
 
 });
 
+
 /*
-POST /sendMoney
-- params expected:
-  - sender's phone number
-  - amount
-  - currency*/
-// TODO: change to post
-$app->get('/sendMoney', function() use ($app) {
+  POST /sendMoney
 
-  /*
-    preconditions
+  http params expected:
+    - r_phone - recipient's phone number
+    - amount  - amount in US dollars
+    - currency - don't bother it's going to be "USD"
+                 (placeholder for future feature)
+  other preconds:
+    - $_SESSION['cbid'] is set to current user's coinbase id
 
+  Returned On Success:
+  {
+    "status" : true
+  }
 
-  */
+  Returned On Failure:
+  {
+    "status" : false,
+    "msg"    : <error-msg>
+  }
 
+*/
+$app->post('/sendMoney', function() use ($app) {
+  // TODO Input Validation!
+  $req = $app->request;
+  $rPhone = $req->params('r_phone');
+  $amount = $req->params('amount');
+  $currency = 'USD'; // 'MERICA
 
+  try {
+    // Get user's token using the cbid
+    $dbc = new DbConn();
+    $tokens = $dbc->getUserTokens($_SESSION['cbid']);
+
+    // lookup recipient's email using the phone number in our database
+    $email = $dbc->getEmailByPhoneNumber($rPhone);
+
+    // if recipient's email is found (assume it will be)
+    // get coinbase object
+    $_CLIENT_ID = getenv('FC_CLIENT_ID');
+    $_CLIENT_SECRET = getenv('FC_CLIENT_SECRET');
+    $_REDIRECT_URL = "http://localhost:8080/server/callback";
+    $coinbaseOauth = new Coinbase_OAuth($_CLIENT_ID, $_CLIENT_SECRET, $_REDIRECT_URL);
+    $coinbase = Coinbase::withOauth($coinbaseOauth, $tokens);
+
+    // Send US dollars!
+    $response = $coinbase->sendMoney($email, $amount, null, null, "USD"); // HAH 'Merica
+    if ($response->success) {
+      echo json_decode(array(
+        "status" : true
+      ));
+    } else {
+      echo json_decode(array(
+        "status" : false,
+        "msg" : "Send money failed!"
+      ));
+    }
+
+  } catch (Exception $e) {
+    echo json_decode(array(
+      "status" : false,
+      "msg" : $e->getMessage()
+    ));
+  }
 });
 
 $app->run();

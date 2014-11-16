@@ -19,13 +19,14 @@ class DbConn {
   // Stores tokens for the given user
   // If the phone number already exists,
   // just update the access and refresh tokens.
-  public function storeUserToken($cbId, $accessToken, $refreshToken) {
+  public function storeUserToken($cbId, $accessToken, $refreshToken, $email) {
     // TODO Add user to database
-    $query = "INSERT INTO users (cb_id, cb_access_token, cb_refresh_token) ";
-    $query .= "VALUES ('$cbId','$accessToken','$refreshToken') ";
+    $query = "INSERT INTO users (cb_id, cb_access_token, cb_refresh_token, email) ";
+    $query .= "VALUES ('$cbId','$accessToken','$refreshToken', '$email') ";
     $query .= "ON DUPLICATE KEY UPDATE ";
     $query .= "cb_access_token=VALUES(cb_access_token), ";
-    $query .= "cb_refresh_token=VALUES(cb_refresh_token);";
+    $query .= "cb_refresh_token=VALUES(cb_refresh_token), ";
+    $query .= "email=VALUES(email);";
     $result = $this->CONN->real_query($query);
     if (!$result) {
       throw new Exception($this->CONN->error);
@@ -60,7 +61,7 @@ class DbConn {
     }
     // Fetch only the first record and
     // return the access/refresh token
-    $row = $res->fetch_assoc();
+    $row = $result->fetch_assoc();
     return array(
       "access_token" => $row['cb_access_token'],
       "refresh_token" => $row['cb_refresh_token']
@@ -71,12 +72,23 @@ class DbConn {
     $query = "UPDATE users ";
     $query .= "SET phone_no='$phoneNum' ";
     $query .= "WHERE cb_id='$cbId';";
-    
+
     $result = $this->CONN->real_query($query);
     if (!result) {
       throw new Exception($this->CONN->error);
     }
     return true;
+  }
+
+  public function getEmailByPhoneNumber($phoneNum) {
+    $query = "SELECT email FROM users ";
+    $query .= "WHERE phone_no='$phoneNum';";
+    $result = $this->CONN->query($query);
+    if (!result || $result->num_rows === 0) {
+      throw new Exception($this->CONN->error);
+    }
+    $row = $result->fetch_assoc();
+    return $row['email'];
   }
 }
 
