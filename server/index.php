@@ -165,6 +165,26 @@ $app->get('/register', function() use ($app){
 
 });
 
+/*
+  GET /attachPhone
+
+  http params expected:
+    - phone - phone number
+  session vars:
+    - cbid  - user's coinbase id
+
+  Attaches phone number to given cbid.
+
+*/
+$app->get('/attachPhone', function() use ($app) {
+  $dbc = new DbConn();
+  // TODO Input Validation
+  try {
+    $dbc->attachPhone($_SESSION['cbid'], $app->request->params('phone'));
+  } catch (Exception $e) {
+    echo json_decode(array());
+  }
+});
 
 /*
   POST /sendMoney
@@ -216,19 +236,19 @@ $app->post('/sendMoney', function() use ($app) {
     $response = $coinbase->sendMoney($email, $amount, null, null, "USD"); // HAH 'Merica
     if ($response->success) {
       echo json_decode(array(
-        "status" : true
+        "status" => true
       ));
     } else {
       echo json_decode(array(
-        "status" : false,
-        "msg" : "Send money failed!"
+        "status" => false,
+        "msg" => "Send money failed!"
       ));
     }
 
   } catch (Exception $e) {
     echo json_decode(array(
-      "status" : false,
-      "msg" : $e->getMessage()
+      "status" => false,
+      "msg" => $e->getMessage()
     ));
   }
 });
