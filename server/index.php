@@ -166,6 +166,25 @@ $app->get('/register', function() use ($app){
 });
 
 /*
+  POST /
+*/
+
+
+/*
+
+*/
+$app->get('/testGet', function() use ($app) {
+  echo json_encode(array(
+    "key" => "value",
+    "key1" => "value1"
+  ));
+});
+
+$app->post('/testPost', function() use ($app) {
+  echo json_encode($app->request->params);
+});
+
+/*
   GET /attachPhone
 
   http params expected:
@@ -220,6 +239,12 @@ $app->get('/attachPhone', function() use ($app) {
 $app->post('/sendMoney', function() use ($app) {
   // TODO Input Validation!
   $req = $app->request;
+  if (!isset($req->params('r_phone')) || !isset($req->params('amount'))) {
+    $msg = "";
+    if (!isset($req->params('r_phone'))) {
+      $msg = "";
+    }
+  }
   $rPhone = $req->params('r_phone');
   $amount = $req->params('amount');
   $currency = 'USD'; // 'MERICA
