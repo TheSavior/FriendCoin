@@ -23,6 +23,10 @@ define(["section", 'tapHandler', 'platform', 'event', 'completely'], function (S
         tap: this._cancelTapped.bind(this)
       });
 
+      new TapHandler(document.getElementById('btn-confirm'), {
+        tap: this._confirmTapped.bind(this)
+      });
+
     },
 
     show: function () {
@@ -46,6 +50,7 @@ define(["section", 'tapHandler', 'platform', 'event', 'completely'], function (S
 
         contacts[name] = newKey;
       }
+
       newContacts = contacts;
       names = Object.keys(contacts);
 
@@ -64,18 +69,30 @@ define(["section", 'tapHandler', 'platform', 'event', 'completely'], function (S
       document.getElementById('dropdown').innerHTML = vals;
     },
 
-    _nameChanged: function (e) {
+    _nameChanged: function () {
       this._updateAutocomplete();
     },
 
     _dropdownBlurred: function(e) {
-      // this._recipient.value = e.
-
       this._recipient.value = e.target.selectedOptions[0].text;
     },
 
-    _cancelTapped: function(e) {
+    _cancelTapped: function() {
       Event.trigger("showPage", "app");
+    },
+
+    _confirmTapped: function() {
+      var amount = parseFloat(document.getElementById('amount').value);
+
+      var transaction = {
+        amount: amount,
+        phoneNumber: this._dropdown.value,
+        name: this._dropdown.selectedOptions[0].textContent
+      };
+
+      Event.trigger("setTransaction", transaction);
+      Event.trigger("showPage", "confirmPage");
+
     }
   });
 
