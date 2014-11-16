@@ -261,7 +261,7 @@ $app->post('/sendMoney', function() use ($app) {
     // get coinbase object
     $_CLIENT_ID = getenv('FC_CLIENT_ID');
     $_CLIENT_SECRET = getenv('FC_CLIENT_SECRET');
-    $_REDIRECT_URL = "http://localhost:8080/server/callback";
+    $_REDIRECT_URL = "http://drawers.ngrok.com/server/callback";
     $coinbaseOauth = new Coinbase_OAuth($_CLIENT_ID, $_CLIENT_SECRET, $_REDIRECT_URL);
     $coinbase = Coinbase::withOauth($coinbaseOauth, $tokens);
 
