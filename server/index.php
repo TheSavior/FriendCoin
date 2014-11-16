@@ -239,9 +239,9 @@ $app->get('/attachPhone', function() use ($app) {
 $app->post('/sendMoney', function() use ($app) {
   // TODO Input Validation!
   $req = $app->request;
-  if (!isset($req->params('r_phone')) || !isset($req->params('amount'))) {
+  if (is_null($req->params('r_phone')) || is_null($req->params('amount'))) {
     $msg = "";
-    if (!isset($req->params('r_phone'))) {
+    if (is_null($req->params('r_phone'))) {
       $msg = "";
     }
   }
