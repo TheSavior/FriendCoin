@@ -1,4 +1,4 @@
-define(["event", "sections/loginPage", "sections/appPage", "sections/newTrans", "sections/phonePage"], function(Event, LoginPage, AppPage, NewTrans, PhonePage) {
+define(["event", "sections/loginPage", "sections/appPage", "sections/newTrans", "sections/phonePage", "sections/confirmPage"], function(Event, LoginPage, AppPage, NewTrans, PhonePage, ConfirmPage) {
   function LoginManager() {
     this.init();
   }
@@ -17,6 +17,7 @@ define(["event", "sections/loginPage", "sections/appPage", "sections/newTrans", 
       this.pages.app = AppPage;
       this.pages.newTrans = NewTrans;
       this.pages.phonePage = PhonePage;
+      this.pages.confirmPage = ConfirmPage;
 
       if (localStorage.isLoggedIn === "true") {
         document.body.classList.add("open");

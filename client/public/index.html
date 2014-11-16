@@ -22,7 +22,7 @@
         <div id="page-phone" class="page hidden">
           <div class="padding">
             <page class="title">Phone number</page>
-            <input type="number" id="amount" class="textbox" />
+            <input type="number" id="phone-number" class="textbox" />
             <div id="btn-phone" class="button">Continue</div>
           </div>
         </div>
@@ -81,8 +81,21 @@
             </div>
           </div>
         </div>
-      </div>
 
+        <div id="page-confirm" class="page hidden">
+          <div class="padding">
+            <p>Are you sure you want to send <span id="confirm-name"></span> <span class="currency" id="confirm-amount"></span></p>
+
+
+            <div class="button-group">
+              <div id="btn-def-confirm" class="button button-primary">Confirm</div>
+              <div id="btn-def-cancel" class="button">Cancel</div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
     </div>
 
     <script>

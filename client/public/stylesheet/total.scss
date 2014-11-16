@@ -123,6 +123,16 @@ body.open {
   }
 }
 
+#page-confirm {
+  span {
+    font-weight: bold;
+  }
+
+  .currency:before {
+    content: "$";
+  }
+}
+
 .title-bar {
   height: 44px;
   background-color: $primary;
