@@ -20,7 +20,7 @@ $app->get('/', function() {
   // Initialize Coinbase Oauth object
   $_CLIENT_ID = getenv('FC_CLIENT_ID');
   $_CLIENT_SECRET = getenv('FC_CLIENT_SECRET');
-  $_REDIRECT_URL = "http://localhost:8080/server/callback";
+  $_REDIRECT_URL = "http://drawers.ngrok.com/server/callback";
   $coinbaseOauth = new Coinbase_OAuth($_CLIENT_ID, $_CLIENT_SECRET, $_REDIRECT_URL);
 
   // Render the index.html file
@@ -52,13 +52,13 @@ $app->get('/callback', function() use ($app) {
   // Defining the CLIENT and REDIRECT URLS
   $_CLIENT_ID = getenv('FC_CLIENT_ID');
   $_CLIENT_SECRET = getenv('FC_CLIENT_SECRET');
-  $_REDIRECT_URL = "http://localhost:8080/server/callback";
+  $_REDIRECT_URL = "http://drawers.ngrok.com/server/callback";
 
   // if code isn't set, set authed to 0
   // and redirect back to homepage
   if(is_null($app->request->params('code'))) {
     $app->setCookie('authed', 0);
-    $app->response->headers->set('Location', 'http://localhost:8080/server/');
+    $app->response->headers->set('Location', 'http://drawers.ngrok.com/server/');
     return;
   }
 
@@ -94,7 +94,7 @@ $app->get('/callback', function() use ($app) {
     $app->setCookie('failed', 1);
     $app->setCookie('msg', $e->getMessage());
   } finally {
-    $app->response->headers->set('Location', 'http://localhost:8080/server/');
+    $app->response->headers->set('Location', 'http://drawers.ngrok.com/server/');
   }
 });
 
@@ -130,7 +130,7 @@ $app->get('/register', function() use ($app){
   $_CLIENT_SECRET = getenv('FC_CLIENT_SECRET');
 
   // Note: your redirect URL should use HTTPS.
-  $_REDIRECT_URL = "http://localhost:8080/server/register";
+  $_REDIRECT_URL = "http://drawers.ngrok.com/server/register";
 
   $coinbaseOauth = new Coinbase_OAuth($_CLIENT_ID, $_CLIENT_SECRET, $_REDIRECT_URL);
 
