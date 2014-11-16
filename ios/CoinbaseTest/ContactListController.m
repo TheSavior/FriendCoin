@@ -44,15 +44,18 @@
 
         NSString *firstName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonFirstNameProperty));
         NSString *lastName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonLastNameProperty));
-        NSString *name = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+        
+        if (firstName != NULL && lastName != NULL) {
+            NSString *name = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
 
-//        kABPersonCompositeNameFormatFirstNameFirst
+    //        kABPersonCompositeNameFormatFirstNameFirst
 
-        ABMultiValueRef phoneNumbers = ABRecordCopyValue(person, kABPersonPhoneProperty);
+            ABMultiValueRef phoneNumbers = ABRecordCopyValue(person, kABPersonPhoneProperty);
 
-        if(ABMultiValueGetCount(phoneNumbers) >= 1) {
-            NSString *phoneNumber = (__bridge_transfer NSString *) ABMultiValueCopyValueAtIndex(phoneNumbers, 0);
-            [myDictionary setObject:name  forKey:phoneNumber];
+            if(ABMultiValueGetCount(phoneNumbers) >= 1) {
+                NSString *phoneNumber = (__bridge_transfer NSString *) ABMultiValueCopyValueAtIndex(phoneNumbers, 0);
+                [myDictionary setObject:phoneNumber  forKey:name];
+            }
         }
     }
     NSError *error = nil;
@@ -94,7 +97,6 @@
                 for (CFIndex idx = 0; idx < CFArrayGetCount(people); idx++) {
                     ABRecordRef person = CFArrayGetValueAtIndex(people, idx);
                     NSString *name = (__bridge NSString *)ABRecordCopyCompositeName(person);
-                    NSLog(@"SOMEONE NAMED %@", name);
                 }
             } else {
                 [self sendResponse:@"{}"];
