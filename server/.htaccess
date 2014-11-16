@@ -3,7 +3,7 @@ RewriteCond %{REQUEST_FILENAME} !-f
 
 RewriteCond %{REQUEST_URI} ^/([^/]+)/(.+)$
 RewriteCond %{DOCUMENT_ROOT}/%1/build/%2 -f
-RewriteRule ^(.*)$ /%1/build/%2 [L,R]
+RewriteRule ^(.*)$ /%1/build/%2 [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.php [QSA,L]
