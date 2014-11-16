@@ -181,7 +181,7 @@ $app->get('/testGet', function() use ($app) {
 });
 
 $app->post('/testPost', function() use ($app) {
-  echo json_encode($app->request->params);
+  echo json_encode($app->request->post());
 });
 
 /*
