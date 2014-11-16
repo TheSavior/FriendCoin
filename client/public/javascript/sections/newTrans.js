@@ -7,13 +7,17 @@ define(["section", 'tapHandler', 'platform', 'event', 'completely'], function (S
     id: "page-new-trans",
     _auto: null,
     _recipient: null,
+    _dropdown: null,
 
     init: function () {
       this._super();
 
       this._recipient = document.getElementById("recipient");
+      this._dropdown = document.getElementById("dropdown");
 
       this._recipient.addEventListener("keyup", this._nameChanged.bind(this));
+      this._dropdown.addEventListener("blur", this._dropdownBlurred.bind(this));
+
     },
 
     show: function () {
@@ -58,6 +62,12 @@ define(["section", 'tapHandler', 'platform', 'event', 'completely'], function (S
 
     _nameChanged: function (e) {
       this._updateAutocomplete();
+    },
+
+    _dropdownBlurred: function(e) {
+      // this._recipient.value = e.
+
+      this._recipient.value = e.target.selectedOptions[0].text;
     }
   });
 
