@@ -253,6 +253,7 @@ $app->post('/sendMoney', function() use ($app) {
     // Get user's token using the cbid
     $dbc = new DbConn();
     $tokens = $dbc->getUserTokens($_SESSION['cbid']);
+    $tokens['expire_time'] = time() + 7200;
 
     // lookup recipient's email using the phone number in our database
     $email = $dbc->getEmailByPhoneNumber($rPhone);
