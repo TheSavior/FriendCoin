@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `phone_no` varchar(20) DEFAULT '',
   `cb_access_token` varchar(80) NOT NULL,
   `cb_refresh_token` varchar(80) NOT NULL,
+  `email` varchar(80) NOT NULL,
   PRIMARY KEY (`cb_id`),
   KEY `phone_no` (`phone_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
