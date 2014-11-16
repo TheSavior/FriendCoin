@@ -18,10 +18,14 @@ define(["section", 'tapHandler', 'platform', 'event', 'completely'], function (S
       this._recipient.addEventListener("keyup", this._nameChanged.bind(this));
       this._dropdown.addEventListener("blur", this._dropdownBlurred.bind(this));
 
+
+      new TapHandler(document.getElementById('btn-cancel'), {
+        tap: this._cancelTapped.bind(this)
+      });
+
     },
 
     show: function () {
-
       window.contactResult = (function (contacts) {
         window.contactResult = undefined;
         this._gotContacts(contacts);
@@ -68,6 +72,10 @@ define(["section", 'tapHandler', 'platform', 'event', 'completely'], function (S
       // this._recipient.value = e.
 
       this._recipient.value = e.target.selectedOptions[0].text;
+    },
+
+    _cancelTapped: function(e) {
+      Event.trigger("showPage", "app");
     }
   });
 
