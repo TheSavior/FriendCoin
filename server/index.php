@@ -195,7 +195,7 @@ $app->post('/testPost', function() use ($app) {
   Saves phone number to given coinbase id in database
 
 */
-$app->get('/attachPhone', function() use ($app) {
+$app->post('/attachPhone', function() use ($app) {
   $dbc = new DbConn();
   // TODO Input Validation
   try {

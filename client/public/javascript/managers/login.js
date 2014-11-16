@@ -89,7 +89,7 @@ define(["event", "sections/loginPage", "sections/appPage", "sections/newTrans", 
     },
 
     _hasPhoneNumber: function() {
-      return docCookie.getItem("phone") && docCookie.getItem("phone") === '1';
+      return docCookie.getItem("hasPhone") && docCookie.getItem("hasPhone") === '1';
     }
   };
 

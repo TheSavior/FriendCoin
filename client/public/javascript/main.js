@@ -11,21 +11,17 @@ function init() {
   window.log = console.log.bind(console);
 
   require(['event', 'managers/login'], function (Event, LoginManager) {
-    // setTimeout(function () {
-    // Event.trigger("showPage", "app");
-    // Event.trigger("showPage", "newTrans");
-    // }, 300);
-
     setTimeout(function () {
-      if(docCookie.getItem("authed") && docCookie.getItem("authed") === '1' && localStorage.isLoggedIn !== "true") {
+      if(docCookie.getItem("authed") && docCookie.getItem("authed") === '1') {//} && localStorage.isLoggedIn !== "true") {
 
         Event.trigger("authenticatedStatusChanged", {
           loggedIn: true
         });
 
-        docCookie.removeItem("authed");
+        // docCookie.removeItem("authed");
       }
     }, 0);
+
   });
 }
 
@@ -92,5 +88,67 @@ window.docCookie = {
     return aKeys;
   }
 };
+
+window.getRequest = function (url) {
+  return new Promise(function (resolve, reject) {
+
+
+    var request = new XMLHttpRequest();
+
+    request.open('GET', url, true);
+
+    request.onload = function () {
+      if(request.status >= 200 && request.status < 400) {
+        // Success!
+        var data = JSON.parse(request.responseText);
+        resolve(data);
+      } else {
+        // We reached our target server, but it returned an error
+        reject(request);
+      }
+    };
+
+    request.onerror = function (error) {
+      reject(error)
+        // There was a connection error of some sort
+    };
+
+    request.send();
+
+  });
+};
+
+window.postRequest = function (url, data) {
+  return new Promise(function (resolve, reject) {
+
+
+    var request = new XMLHttpRequest();
+    request.open('POST', url, true);
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+
+    request.onload = function () {
+      if(request.status >= 200 && request.status < 400) {
+        // Success!
+        var data = JSON.parse(request.responseText);
+        resolve(data);
+      } else {
+        reject(request);
+      }
+    };
+
+    request.onerror = function (error) {
+      reject(error);
+    };
+
+    var params = Object.keys(data)
+      .map(function (k) {
+        return encodeURIComponent(k) + "=" + encodeURIComponent(data[k]);
+      }).join('&');
+
+
+    request.send(params);
+
+  });
+}
 
 // Put things that are used without internet here. Make sure they aren't included later!

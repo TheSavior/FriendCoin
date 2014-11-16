@@ -12,9 +12,9 @@ define(["section", 'tapHandler', 'platform', 'event'], function(Section, TapHand
         end: this._stopPropagation.bind(this)
       });
 
-      new TapHandler(document.getElementById("scan-button"), {
-        tap: this._scanTapped.bind(this),
-      });
+      // new TapHandler(document.getElementById("scan-button"), {
+      //   tap: this._scanTapped.bind(this),
+      // });
     },
 
     show: function(e) {
@@ -27,18 +27,18 @@ define(["section", 'tapHandler', 'platform', 'event'], function(Section, TapHand
       e.stopPropagation();
     },
 
-    _scanTapped: function(e) {
-      e.stopPropagation();
+    // _scanTapped: function(e) {
+    //   e.stopPropagation();
 
-      this._addResult("Loading scanner");
+    //   this._addResult("Loading scanner");
 
-      window.qrCodeResult = (function(result) {
-        this._addResult("You scanned "+result);
-        window.qrCodeResult = undefined;
-      }).bind(this);
+    //   window.qrCodeResult = (function(result) {
+    //     this._addResult("You scanned "+result);
+    //     window.qrCodeResult = undefined;
+    //   }).bind(this);
 
-      window.location = "coinbase://readQRCode";
-    },
+    //   window.location = "coinbase://readQRCode";
+    // },
 
     _stopPropagation: function(e) {
       e.stopPropagation();

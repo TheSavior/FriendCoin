@@ -51,10 +51,16 @@ define(["section", 'tapHandler', 'platform', 'event', 'completely'], function (S
         contacts[name] = newKey;
       }
 
-      newContacts = contacts;
-      names = Object.keys(contacts);
+      postRequest("/server/filterList", {data: JSON.stringify(contacts)})
+      .then((function(result) {
+        if (typeof result.data == "object") {
+          newContacts = result.data;
+          names = Object.keys(newContacts);
+          this._updateAutocomplete();
 
-      this._updateAutocomplete();
+          console.log(newContacts);
+        }
+      }).bind(this));
     },
 
     _updateAutocomplete: function () {

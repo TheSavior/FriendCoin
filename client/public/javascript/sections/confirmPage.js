@@ -19,6 +19,14 @@ define(["section", 'tapHandler', 'platform', 'event', 'completely'], function (S
     },
 
     _confirmTapped: function() {
+
+			debugger;
+
+    	// postRequest('/server/sendMoney', {
+    	// 	r_phone: this._lastTransaction.phoneNumber,
+    	// 	amount: this._lastTransaction.amount
+    	// });
+
     	Event.trigger("showPage", "app");
     },
 
@@ -29,7 +37,7 @@ define(["section", 'tapHandler', 'platform', 'event', 'completely'], function (S
     _gotTransaction: function (transaction) {
       this._lastTransaction = transaction;
       document.getElementById("confirm-name").textContent = transaction.name;
-     	document.getElementById("confirm-amount").textContent = transaction.amount;
+     	document.getElementById("confirm-amount").textContent = transaction.amount.toFixed(2);
     }
 
   });
