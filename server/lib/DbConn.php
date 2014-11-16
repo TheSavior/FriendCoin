@@ -80,6 +80,17 @@ class DbConn {
     return true;
   }
 
+  // returns list of phone numbers
+  public function getAllPhoneNumbers() {
+    $query = "SELECT phone_no FROM users;";
+    $dbResult = $this->CONN->query($query);
+    $result = array();
+    while($row = $dbResult->fetch_assoc()) {
+      array_push($result, $row['phone_no']);
+    }
+    return $result;
+  }
+
   public function getEmailByPhoneNumber($phoneNum) {
     $query = "SELECT email FROM users ";
     $query .= "WHERE phone_no='$phoneNum';";
@@ -98,9 +109,10 @@ class DbConn {
 /*
 $dbcon = new DbConn();
 try {
-  $dbcon->storeUserToken('1234567890', 'ACCESSTOKENABCDEF', 'REFRESHTOKENABCDEF');
+  //$dbcon->storeUserToken('1234567890', 'ACCESSTOKENABCDEF', 'REFRESHTOKENABCDEF');
+  $res = $dbcon->getAllPhoneNumbers();
+  print_r($res);
   echo "SUCCESS!";
 } catch (Exception $e) {
   echo "ERROR: $e";
-}
-*/
+}/**/

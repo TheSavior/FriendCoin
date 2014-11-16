@@ -286,4 +286,37 @@ $app->post('/sendMoney', function() use ($app) {
   }
 });
 
+/*
+  POST filterList
+
+  params expected
+  - data  - JSON string
+    {
+      "" : ""
+    }
+*/
+$app->post('/filterList', function() use ($app) {
+  try {
+
+    $contactList = json_decode($app->request->params('data'), true);
+    $dbc = new DbConn();
+    $allPhones = $dbc->getAllPhoneNumbers();
+
+    $filtered = array_filter($contactList, function($number) use ($allPhones){
+      return in_array($number, $allPhones);
+    });
+
+    echo json_encode(array(
+      "status" => true,
+      "data" => $filtered
+    ));
+
+  } catch (Exception $e) {
+    echo json_encode(array(
+      "status" => false,
+      "msg" => $e->getMessage()
+    ));
+  }
+});
+
 $app->run();
