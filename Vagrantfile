@@ -12,7 +12,19 @@ sudo ln -s /vagrant /var/www/html
 sudo apt-get update
 sudo apt-get install -y php5-curl
 
-# NOTE set VirtualHost to AllowOverride All
+echo "SETUP APACHE CONFIGURATION:"
+echo "==========================="
+echo "Go to /etc/apache2/apache2.conf"
+echo "Under '<Directory />' set AllowOverride to All"
+echo ""
+echo "SETUP DATABASE:"
+echo "==============="
+echo "1. Go to localhost:8080/phpmyadmin and login"
+echo "2. Click 'Import'"
+echo "3. Click 'Choose File..'"
+echo "4. Choose server/db_schema/friendcoindb.sql"
+
+
 
 SCRIPT
 
