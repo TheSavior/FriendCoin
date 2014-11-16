@@ -17,7 +17,9 @@ $app->get('/', function() {
 
   $coinbaseOauth = new Coinbase_OAuth($_CLIENT_ID, $_CLIENT_SECRET, $_REDIRECT_URL);
 
-  echo '<a href="' . $coinbaseOauth->createAuthorizeUrl("user", "balance", "buttons") . '">Connect to Coinbase</a>';
+  require_once('build/index.html');
+
+  // echo '<a href="' . $coinbaseOauth->createAuthorizeUrl("user", "balance", "buttons") . '">Connect to Coinbase</a>';
 });
 
 $app->get('/callback', function() use ($app) {

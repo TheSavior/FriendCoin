@@ -1,4 +1,5 @@
 module.exports = function(grunt) {
+  // var build = '../server/build/';
 
   // Project configuration.
   grunt.initConfig({
@@ -10,7 +11,7 @@ module.exports = function(grunt) {
           style: "expanded"
         },
         files: [{
-          'build/stylesheet/total.css': 'public/stylesheet/total.scss',
+          '../server/build/stylesheet/total.css': 'public/stylesheet/total.scss',
         }]
       },
       dist: {
@@ -18,7 +19,7 @@ module.exports = function(grunt) {
           style: "compressed",
         },
         files: [{
-          'build/stylesheet/total.css': 'public/stylesheet/total.scss',
+          '../server/build/stylesheet/total.css': 'public/stylesheet/total.scss',
         }]
       }
     },
@@ -58,7 +59,7 @@ module.exports = function(grunt) {
       },
 
       build: {
-        files: ['build/**/*'],
+        files: ['../server/build/**/*'],
         options: {
           livereload: true
         }
@@ -72,7 +73,7 @@ module.exports = function(grunt) {
 
           name: "main",
           mainConfigFile: "public/javascript/config.js",
-          out: "build/javascript/main.min.js",
+          out: "../server/build/javascript/main.min.js",
 
           optimize: 'none',
           generateSourceMaps: false,
@@ -86,16 +87,16 @@ module.exports = function(grunt) {
     uglify: {
       build: {
         files: {
-          'build/javascript/main.min.js': ['build/javascript/main.min.js']
+          '../server/build/javascript/main.min.js': ['../server/build/javascript/main.min.js']
         }
       }
     },
 
     clean: {
-      map: ["build/javascript/main.min.js.map"],
-      images:["build/images/"],
-      fonts:["build/fonts/"],
-      files:["build/files/"]
+      map: ["../server/build/javascript/main.min.js.map"],
+      images:["../server/build/images/"],
+      fonts:["../server/build/fonts/"],
+      files:["../server/build/files/"]
     },
 
     env: {
@@ -111,7 +112,7 @@ module.exports = function(grunt) {
     preprocess: {
       html: {
         files: {
-          'build/index.html': 'public/index.html'
+          '../server/build/index.html': 'public/index.html'
         }
       },
     },
@@ -123,7 +124,7 @@ module.exports = function(grunt) {
         filter: 'isFile',
 
         src: 'public/images/**/*',
-        dest: 'build/images/',
+        dest: '../server/build/images/',
       },
 
       fonts: {
@@ -132,14 +133,14 @@ module.exports = function(grunt) {
         filter: 'isFile',
 
         src: 'public/fonts/**/*',
-        dest: 'build/fonts/',
+        dest: '../server/build/fonts/',
       },
 
       cname: {
         filter: 'isFile',
 
         src: 'public/CNAME',
-        dest: 'build/CNAME',
+        dest: '../server/build/CNAME',
       },
 
       files: {
@@ -148,7 +149,7 @@ module.exports = function(grunt) {
         filter: 'isFile',
 
         src: 'public/files/**/*',
-        dest: 'build/files/',
+        dest: '../server/build/files/',
       }
     },
 
@@ -159,8 +160,8 @@ module.exports = function(grunt) {
           collapseWhitespace: true
         },
         files: { // Dictionary of files
-          'build/index.html': 'build/index.html',
-          'build/404.html': 'build/404.html'
+          '../server/build/index.html': '../server/build/index.html',
+          '../server/build/404.html': '../server/build/404.html'
         }
       }
     },
@@ -172,14 +173,14 @@ module.exports = function(grunt) {
           cssmin: true,
           uglify: true
         },
-        src: ['build/index.html', 'build/404.html'],
-        dest: ['build/']
+        src: ['../server/build/index.html', '../server/build/404.html'],
+        dest: ['../server/build/']
       }
     },
 
     'http-server': {
         tests: {
-            root: 'build',
+            root: '../server/build',
             port: 3300,
             host: 'localhost',
             ext: 'html',
