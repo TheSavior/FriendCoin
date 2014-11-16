@@ -13,8 +13,8 @@
   <body>
     <div id="outerWrapper">
       <div id="page-login" class="page">
-        <div>FriendCoin</div></br>
-        <img src="fonts/Bitcoin.png" style="position:absolute; margin-left:10%; margin-top:-14%" alt="" height="20" width="20">
+        <div class="title">FriendC<img src="fonts/Bitcoin.png" alt="" height="20" width="20">in</div>
+
         <div style="font-size:15px;">Fast & Safe way to send $ to your friends</div>
         <div id="btn-login">Log in</div>
       </div>
@@ -55,20 +55,23 @@
             New Transaction
           </div>
         </div>
-          <form>
-            <center>Pay To:</center>
-              <div id='container' style='border:1px solid #999;'></div>
-            <center>
-            </br></br>
-            Amount Owed:</br>
-            <input type="text" name="amountowe">
+        <div class="padding">
+          <label>Pay To:
+            <input type="text" id="recipient" class="textbox" />
+          </label>
+          <select id="dropdown" class="textbox">
+          </select>
 
-          </form></br>
-        </center>
-        <center>
-          <div class="button">Confirm</div>
-          <div class="button">Cancel</div>
-        </center>gi
+
+          <label>Amount Owed (USD):
+            <input type="number" id="amount" class="textbox" />
+          </label>
+
+          <div class="button-group">
+            <div id="btn-confirm" class="button button-primary">Confirm</div>
+            <div id="btn-cancel" class="button">Cancel</div>
+          </div>
+        </div>
       </div>
     </div>
 

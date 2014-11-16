@@ -172,12 +172,32 @@ body.open {
   }
 }
 
+.title {
+  margin-bottom: 10px;
+}
+
+.button-group {
+  padding: 40px 0;
+}
+
 .button {
-  border: 1px solid $borderColor;
-  padding: 5px;
+  text-align: center;
 }
 
 .button-primary {
   background-color: $primary;
   color: white;
+}
+
+.padding {
+  position: relative;
+  padding: 10px;
+}
+
+.textbox, .button {
+  border: 1px solid $borderColor;
+  padding: 5px;
+  margin-bottom: 10px;
+  display: block;
+  width: 100%;
 }
