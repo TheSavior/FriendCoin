@@ -74,7 +74,7 @@ class DbConn {
     $query .= "WHERE cb_id='$cbId';";
 
     $result = $this->CONN->real_query($query);
-    if (!result) {
+    if (!$result) {
       throw new Exception($this->CONN->error);
     }
     return true;
@@ -84,7 +84,7 @@ class DbConn {
     $query = "SELECT email FROM users ";
     $query .= "WHERE phone_no='$phoneNum';";
     $result = $this->CONN->query($query);
-    if (!result || $result->num_rows === 0) {
+    if (!$result || $result->num_rows === 0) {
       throw new Exception($this->CONN->error);
     }
     $row = $result->fetch_assoc();
