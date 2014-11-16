@@ -9,66 +9,101 @@ require_once('lib/DbConn.php');
 
 $app = new \Slim\Slim();
 
+/*
+  GET /
+
+  Homepage for PayRail
+
+*/
 $app->get('/', function() {
-  // Create an application at https://coinbase.com/oauth/applications and set these values accordingly
+
+  // Initialize Coinbase Oauth object
   $_CLIENT_ID = getenv('FC_CLIENT_ID');
   $_CLIENT_SECRET = getenv('FC_CLIENT_SECRET');
   $_REDIRECT_URL = "http://localhost:8080/server/callback";
-
   $coinbaseOauth = new Coinbase_OAuth($_CLIENT_ID, $_CLIENT_SECRET, $_REDIRECT_URL);
 
+  // Render the index.html file
+  // NOTE: this HTML file has some PHP that uses the above Coinbase Oauth object
   require_once('build/index.html');
-
-  // echo '<a href="' . $coinbaseOauth->createAuthorizeUrl("user", "balance", "buttons") . '">Connect to Coinbase</a>';
 });
 
+
+/*
+  GET /callback
+
+  Redirect URL for Coinbase OAuth
+
+  This endpoint sets cookies and redirects to the homepage.
+
+  This function sets the following cookies:
+  - authed
+    - 0 = auth failed
+    - 1 = auth succeeded
+  - hasPhone
+    - (exists) = user's phone number is in the database
+  - failed
+    - (exists) = something went wrong!
+  - msg
+    - <string> = What exactly went wrong. (only exists when 'failed' exists)
+*/
 $app->get('/callback', function() use ($app) {
 
+  // Defining the CLIENT and REDIRECT URLS
   $_CLIENT_ID = getenv('FC_CLIENT_ID');
   $_CLIENT_SECRET = getenv('FC_CLIENT_SECRET');
   $_REDIRECT_URL = "http://localhost:8080/server/callback";
 
   // if code isn't set, set authed to 0
-  // and redirect
+  // and redirect back to homepage
   if(is_null($app->request->params('code'))) {
     $app->setCookie('authed', 0);
     $app->response->headers->set('Location', 'http://localhost:8080/server/');
     return;
   }
 
-  // Save tokens to session variable
-
-  // Get the tokens using the code
+  // Get the tokens using the code received
   // Get the coinbase object
+  // TODO set authed to 0 if token retrieval fails?
   $coinbaseOauth = new Coinbase_OAuth($_CLIENT_ID, $_CLIENT_SECRET, $_REDIRECT_URL);
   $tokens = $coinbaseOauth->getTokens($app->request->params('code'));
   $coinbase = Coinbase::withOauth($coinbaseOauth, $tokens);
 
-  // Get the user's coinbase id
   try {
     $dbc = new DbConn();
-    $dbc->storeUserToken($coinbase->getUser()->id,
-                         null,
+    // Insert/Update database with user's coinbase id
+    $cbId = $coinbase->getUser()->id;
+    $email = $coinbase->getUser()->email;
+    $dbc->storeUserToken($cbId,
                          $tokens["access_token"],
-                         $tokens["refresh_token"]);
+                         $tokens["refresh_token"],
+                         $email);
+    // Setting a cookie if the user has a phone in the database
+    if ($dbc->userHasPhone($cbId)) {
+      $app->setCookie('hasPhone');
+    }
+
+    // Initializing SESSION variable
+    $_SESSION['cbid'] = $cbId;
+
+    // set cookie to success
+    // redirect to index.php
+    $app->setCookie('authed', 1);
+
   } catch(Exception $e) {
-    echo json_encode(array(
-              "status" => false,
-              "msg" => $e->getMessage()));
+    $app->setCookie('failed');
+    $app->setCookie('msg', $e->getMessage());
+  } finally {
+    $app->response->headers->set('Location', 'http://localhost:8080/server/');
   }
-  // set cookie to success
-  // redirect to index.php
-  $app->setCookie('authed', 1);
-  $app->response->headers->set('Location', 'http://localhost:8080/server/');
 });
 
 
 /*
-POST /register
-- params expected:
-  - phone_no
-- redirects user to AuthorizeUrl
-- redirectUrl is the same as this ‘/register’
+  POST /register
+  - params expected:
+  - redirects user to AuthorizeUrl
+  - redirectUrl is the same as this ‘/register’
 - if code param set
   - get new tokens and store them in session
   - get coinbase token
@@ -115,7 +150,8 @@ $app->get('/register', function() use ($app){
     $dbc = new DbConn();
     $dbc->storeUserToken($_SESSION['phoneno'],
                        $tokens["access_token"],
-                       $tokens["refresh_token"]);
+                       $tokens["refresh_token"],
+                       '');
   } catch(Exception $e) {
     echo json_encode(array(
               "status" => false,
@@ -130,14 +166,91 @@ $app->get('/register', function() use ($app){
 });
 
 /*
-POST /sendMoney
-- params expected:
-  - phone number
-  - amount
-  - currency*/
-// TODO: change to post
-$app->get('/sendMoney', function() use ($app) {
+  GET /attachPhone
 
+  http params expected:
+    - phone - phone number
+  session vars:
+    - cbid  - user's coinbase id
+
+  Attaches phone number to given cbid.
+
+*/
+$app->get('/attachPhone', function() use ($app) {
+  $dbc = new DbConn();
+  // TODO Input Validation
+  try {
+    $dbc->attachPhone($_SESSION['cbid'], $app->request->params('phone'));
+  } catch (Exception $e) {
+    echo json_decode(array());
+  }
+});
+
+/*
+  POST /sendMoney
+
+  http params expected:
+    - r_phone - recipient's phone number
+    - amount  - amount in US dollars
+    - currency - don't bother it's going to be "USD"
+                 (placeholder for future feature)
+  other preconds:
+    - $_SESSION['cbid'] is set to current user's coinbase id
+
+  Returned On Success:
+  {
+    "status" : true
+  }
+
+  Returned On Failure:
+  {
+    "status" : false,
+    "msg"    : <error-msg>
+  }
+
+*/
+$app->post('/sendMoney', function() use ($app) {
+  // TODO Input Validation!
+  $req = $app->request;
+  $rPhone = $req->params('r_phone');
+  $amount = $req->params('amount');
+  $currency = 'USD'; // 'MERICA
+
+  try {
+    // Get user's token using the cbid
+    $dbc = new DbConn();
+    $tokens = $dbc->getUserTokens($_SESSION['cbid']);
+
+    // lookup recipient's email using the phone number in our database
+    $email = $dbc->getEmailByPhoneNumber($rPhone);
+
+    // if recipient's email is found (assume it will be)
+    // get coinbase object
+    $_CLIENT_ID = getenv('FC_CLIENT_ID');
+    $_CLIENT_SECRET = getenv('FC_CLIENT_SECRET');
+    $_REDIRECT_URL = "http://localhost:8080/server/callback";
+    $coinbaseOauth = new Coinbase_OAuth($_CLIENT_ID, $_CLIENT_SECRET, $_REDIRECT_URL);
+    $coinbase = Coinbase::withOauth($coinbaseOauth, $tokens);
+
+    // Send US dollars!
+    $response = $coinbase->sendMoney($email, $amount, null, null, "USD"); // HAH 'Merica
+    if ($response->success) {
+      echo json_decode(array(
+        "status" => true
+      ));
+    } else {
+      echo json_decode(array(
+        "status" => false,
+        "msg" => "Send money failed!"
+      ));
+    }
+
+  } catch (Exception $e) {
+    echo json_decode(array(
+      "status" => false,
+      "msg" => $e->getMessage()
+    ));
+  }
 });
 
 $app->run();
