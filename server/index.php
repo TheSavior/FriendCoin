@@ -10,7 +10,54 @@ require_once('lib/DbConn.php');
 $app = new \Slim\Slim();
 
 $app->get('/', function() {
-  echo "Welcome to the API!";
+  // Create an application at https://coinbase.com/oauth/applications and set these values accordingly
+  $_CLIENT_ID = getenv('FC_CLIENT_ID');
+  $_CLIENT_SECRET = getenv('FC_CLIENT_SECRET');
+  $_REDIRECT_URL = "http://localhost:8080/server/callback";
+
+  $coinbaseOauth = new Coinbase_OAuth($_CLIENT_ID, $_CLIENT_SECRET, $_REDIRECT_URL);
+
+  echo '<a href="' . $coinbaseOauth->createAuthorizeUrl("user", "balance", "buttons") . '">Connect to Coinbase</a>';
+});
+
+$app->get('/callback', function() use ($app) {
+
+  $_CLIENT_ID = getenv('FC_CLIENT_ID');
+  $_CLIENT_SECRET = getenv('FC_CLIENT_SECRET');
+  $_REDIRECT_URL = "http://localhost:8080/server/callback";
+
+  // if code isn't set, set authed to 0
+  // and redirect
+  if(is_null($app->request->params('code'))) {
+    $app->setCookie('authed', 0);
+    $app->response->headers->set('Location', 'http://localhost:8080/server/');
+    return;
+  }
+
+  // Save tokens to session variable
+
+  // Get the tokens using the code
+  // Get the coinbase object
+  $coinbaseOauth = new Coinbase_OAuth($_CLIENT_ID, $_CLIENT_SECRET, $_REDIRECT_URL);
+  $tokens = $coinbaseOauth->getTokens($app->request->params('code'));
+  $coinbase = Coinbase::withOauth($coinbaseOauth, $tokens);
+
+  // Get the user's coinbase id
+  try {
+    $dbc = new DbConn();
+    $dbc->storeUserToken($coinbase->getUser()->id,
+                         null,
+                         $tokens["access_token"],
+                         $tokens["refresh_token"]);
+  } catch(Exception $e) {
+    echo json_encode(array(
+              "status" => false,
+              "msg" => $e->getMessage()));
+  }
+  // set cookie to success
+  // redirect to index.php
+  $app->setCookie('authed', 1);
+  $app->response->headers->set('Location', 'http://localhost:8080/server/');
 });
 
 
@@ -88,6 +135,7 @@ POST /sendMoney
   - currency*/
 // TODO: change to post
 $app->get('/sendMoney', function() use ($app) {
+
 });
 
 $app->run();
