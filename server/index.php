@@ -80,7 +80,7 @@ $app->get('/callback', function() use ($app) {
                          $email);
     // Setting a cookie if the user has a phone in the database
     if ($dbc->userHasPhone($cbId)) {
-      $app->setCookie('hasPhone');
+      $app->setCookie('hasPhone', 1);
     }
 
     // Initializing SESSION variable
@@ -91,7 +91,7 @@ $app->get('/callback', function() use ($app) {
     $app->setCookie('authed', 1);
 
   } catch(Exception $e) {
-    $app->setCookie('failed');
+    $app->setCookie('failed', 1);
     $app->setCookie('msg', $e->getMessage());
   } finally {
     $app->response->headers->set('Location', 'http://localhost:8080/server/');
