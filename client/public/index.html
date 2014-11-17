@@ -13,10 +13,10 @@
     <body>
       <div id="outerWrapper">
         <div id="page-login" class="page">
-          <div class="title">FriendC<img src="fonts/Bitcoin.png" alt="" height="20" width="20">in</div>
+          <div class="title">PayRail</div>
 
           <div style="font-size:15px;">Fast & Safe way to send $ to your friends</div>
-          <div id="btn-login" data-url="<?php echo $coinbaseOauth->createAuthorizeUrl('user', 'balance', 'buttons') ?>">Log in</div>
+          <div id="btn-login" data-url="<?php echo $coinbaseOauth->createAuthorizeUrl('user', 'balance', 'send') ?>">Log in</div>
         </div>
 
         <div id="page-phone" class="page hidden">
@@ -32,7 +32,7 @@
           <div id="pane-translist" class="pane">
             <div id="phone-title-bar" class="title-bar">
               <div class="center">
-                FriendCoin!
+                PayRail
               </div>
               <div class="right">
                 <span class="icon-menu"></span>
@@ -45,13 +45,13 @@
 
             <ul class="transaction-list">
               <li>
-                You purchased bitcoins<span class="positive">2.39</span>
+                You recieved money from Dan<span class="positive">2.39</span>
               </li>
               <li>
-                You purchased bitcoins<span class="positive">.01</span>
+                You recieved money from Chris<span class="positive">.01</span>
               </li>
               <li>
-                You sold bitcoins<span class="negative">.01</span>
+                You sent Kyle money<span class="negative">.01</span>
               </li>
             </ul>
           </div>

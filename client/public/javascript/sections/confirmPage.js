@@ -18,16 +18,22 @@ define(["section", 'tapHandler', 'platform', 'event', 'completely'], function (S
       Event.addListener("setTransaction", this._gotTransaction.bind(this));
     },
 
-    _confirmTapped: function() {
+    _confirmTapped: function () {
+    	var transaction =  {
+        r_phone: this._lastTransaction.phoneNumber,
+        amount: this._lastTransaction.amount
+      };
 
-			debugger;
+      console.log("Sending transaction", transaction);
 
-    	// postRequest('/server/sendMoney', {
-    	// 	r_phone: this._lastTransaction.phoneNumber,
-    	// 	amount: this._lastTransaction.amount
-    	// });
+      postRequest('/server/sendMoney',transaction).then(function (result) {
+          console.log(result);
+        },
+        function (error) {
+          console.error(error);
+        });
 
-    	Event.trigger("showPage", "app");
+      Event.trigger("showPage", "app");
     },
 
     _cancelTapped: function () {
@@ -37,7 +43,7 @@ define(["section", 'tapHandler', 'platform', 'event', 'completely'], function (S
     _gotTransaction: function (transaction) {
       this._lastTransaction = transaction;
       document.getElementById("confirm-name").textContent = transaction.name;
-     	document.getElementById("confirm-amount").textContent = transaction.amount.toFixed(2);
+      document.getElementById("confirm-amount").textContent = transaction.amount.toFixed(2);
     }
 
   });
